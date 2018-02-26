@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 BUILD_DIR=$1
+CACHE_DIR=$2
 
 echo "-----> Installing cmake"
 
@@ -27,8 +28,8 @@ echo ""
 echo "-----> Installing grib"
 
 
-mkdir -p $CACHE_DIR/grib-tools
-cd $CACHE_DIR/grib-tools
+mkdir -p $CACHE_DIR/ecCodes
+cd $CACHE_DIR/ecCodes
 
 # install it
 curl 'https://software.ecmwf.int/wiki/download/attachments/45757960/eccodes-2.6.0-Source.tar.gz?api=v2' > grib.tar.gz
@@ -37,15 +38,15 @@ tar -xzf grib.tar.gz -C grib --strip-components 1
 rm grib.tar.gz
 mkdir build
 cd build
-cmake ../grib -DENABLE_GRIB_THREADS=ON -DENABLE_FORTRAN=OFF -DENABLE_PYTHON=OFF -DENABLE_JPG=OFF -DENABLE_NETCDF=OFF -DCMAKE_INSTALL_PREFIX=$CACHE_DIR/grib-tools
-make && make install
+cmake ../grib -DCMAKE_INSTALL_PREFIX=$CACHE_DIR/ecCodes
+make && ctest && make install
 cd ..
 
 # add it to the PATH and build dir
-mkdir -p $BUILD_DIR/grib-tools
-cp -r $CACHE_DIR/grib-tools $BUILD_DIR
+mkdir -p $BUILD_DIR/ecCodes
+cp -r $CACHE_DIR/ecCodes $BUILD_DIR
 
-export PATH=$PATH:$BUILD_DIR/grib-tools/bin
+export PATH=$PATH:$BUILD_DIR/ecCodes/bin
 
 BUILDPACK_DIR="$(dirname $(dirname $0))"
 mkdir -p $BUILD_DIR/.profile.d

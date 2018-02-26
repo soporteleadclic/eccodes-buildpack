@@ -59,7 +59,7 @@ tar -xzf grib.tar.gz -C grib --strip-components 1
 rm grib.tar.gz
 mkdir build
 cd build
-cmake ../grib -DCMAKE_INSTALL_PREFIX=$CACHE_DIR/grib-tools
+cmake ../grib -DENABLE_GRIB_THREADS=ON -DENABLE_FORTRAN=OFF -DENABLE_PYTHON=OFF -DCMAKE_INSTALL_PREFIX=$CACHE_DIR/grib-tools
 make && make install
 cd ..
 

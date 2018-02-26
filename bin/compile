@@ -53,14 +53,14 @@ mkdir -p $CACHE_DIR/grib-tools
 cd $CACHE_DIR/grib-tools
 
 # install it
-curl 'https://software.ecmwf.int/wiki/download/attachments/45757960/grib-tools-2.6.0-Source.tar.gz?api=v2' > grib.tar.gz
+curl 'https://software.ecmwf.int/wiki/download/attachments/45757960/eccodes-2.6.0-Source.tar.gz?api=v2' > grib.tar.gz
 mkdir grib
 tar -xzf grib.tar.gz -C grib --strip-components 1
 rm grib.tar.gz
 mkdir build
 cd build
 cmake ../grib -DCMAKE_INSTALL_PREFIX=$CACHE_DIR/grib-tools
-make && ctest && make install
+make && make install
 cd ..
 
 # add it to the PATH and build dir

@@ -27,7 +27,7 @@ curl https://s3.amazonaws.com/heroku-vim/vim-7.3.tar.gz -s -O
 tar -C $BUILD_DIR/vim -xvf vim-7.3.tar.gz
 rm vim-7.3.tar.gz
 
-export PATH=$PATH:$BUILD_DIR/app/vim/bin
+export PATH=$PATH:/app/vim/bin
 
 
 ####
@@ -47,7 +47,7 @@ mkdir -p /tmp/codon/vendor
 
 # untar the binary to the directory we want
 tar -C /tmp/codon/vendor -xvf cmake.tar.gz
-rm cmake.tar.gz
+#rm cmake.tar.gz
 
 debug=`ls /tmp/codon/vendor/bin`
 echo $debug
@@ -64,7 +64,7 @@ mkdir -p $CACHE_DIR/grib-tools
 cd $CACHE_DIR/grib-tools
 
 # install it
-curl 'https://software.ecmwf.int/wiki/download/attachments/3473437/grib_api-1.25.0-Source.tar.gz?api=v2' > grib.tar.gz
+curl 'https://software.ecmwf.int/wiki/download/attachments/3473437/grib_api-1.22.0-Source.tar.gz?api=v2' > grib.tar.gz
 mkdir grib
 tar -xzf grib.tar.gz -C grib --strip-components 1
 rm grib.tar.gz

@@ -23,7 +23,7 @@ CACHE_DIR=$2
 ### 
 # install vim
 mkdir -p $BUILD_DIR/vim
-curl https://s3.amazonaws.com/heroku-vim/vim-7.3.tar.gz --location --silent | tar xz -C vim
+curl https://s3.amazonaws.com/heroku-vim/vim-7.3.tar.gz --location --silent | tar xz -C $BUILD_DIR/vim
 export PATH=$PATH:$BUILD_DIR/app/vim/bin
 
 
@@ -44,6 +44,7 @@ mkdir -p /tmp/codon/vendor
 
 # untar the binary to the directory we want
 tar -C /tmp/codon/vendor -xvf cmake.tar.gz
+rm cmake.tar.gz
 
 debug=`ls /tmp/codon/vendor/bin`
 echo $debug
